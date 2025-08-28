@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "9346ad22-8f84-4ab3-bc21-225dd0ea0a1c",
+		"name": "Assessment collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47997305",
+		"_collection_link": "https://boopathim470-2194464.postman.co/workspace/a8e27d32-248b-498b-8554-a01ee7a19cca/collection/47997305-9346ad22-8f84-4ab3-bc21-225dd0ea0a1c?action=share&source=collection_link&creator=47997305"
+	},
+	"item": [
+		{
+			"name": "Scenario1:Create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"ID field is a number anmd status code\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"    const response = pm.response.json();\r",
+							"    pm.expect(response.id).to.exist;\r",
+							"    pm.expect(response.id).to.be.a('number');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"name\": \"{{name}}\",\r\n    \"gender\": \"{{gender}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"status\": \"{{status}}\"\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				},
+				"description": "Generated from cURL: curl -i -H \"Accept:application/json\" -H \"Content-Type:application/json\" -H \"Authorization: Bearer ea69fcc4f5ad920d6de2d43042eb80016022adfb615ad22d9a055d77a3f48af7\" -XPOST \"https://gorest.co.in/public/v2/users\" -d '{\"name\":\"Tenali Ramakrishna\", \"gender\":\"male\", \"email\":\"tenali.ramakrishna@15ce.com\", \"status\":\"active\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Scenario 2: get users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"First user's status is either 'active' or 'inactive'\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"    const users = pm.response.json();\r",
+							"    pm.expect([\"active\", \"inactive\"]).to.include(users[0].status);\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{accessToken}}"
+					}
+				],
+				"url": {
+					"raw": "https://gorest.co.in/public/v2/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				},
+				"description": "Generated from cURL: curl -i -H \"Accept:application/json\" -H \"Content-Type:application/json\" -H \"Authorization: Bearer ea69fcc4f5ad920d6de2d43042eb80016022adfb615ad22d9a055d77a3f48af7\" -XPOST \"https://gorest.co.in/public/v2/users\" -d '{\"name\":\"Tenali Ramakrishna\", \"gender\":\"male\", \"email\":\"tenali.ramakrishna@15ce.com\", \"status\":\"active\"}'"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.collectionVariables.set(\"name\",\"Boopathi\")\r",
+					"pm.collectionVariables.set(\"gender\",\"male\")\r",
+					"pm.collectionVariables.set(\"email\",\"sample@email.com\")\r",
+					"pm.collectionVariables.set(\"status\",\"active\")\r",
+					"pm.collectionVariables.set(\"accessToken\",\"bcb89e216773c8ed1eb7758642c54bdb858a66351ed1cef0a7cbdb88943b5c93\")"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "gender",
+			"value": ""
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "status",
+			"value": ""
+		},
+		{
+			"key": "accessToken",
+			"value": ""
+		}
+	]
+}
